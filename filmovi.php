@@ -1,6 +1,7 @@
 <?php echo ".";
 
-
+    require("dbBroker.php");
+    require("Struktura/Film.php");
 ?>
 
 <!DOCTYPE html>
@@ -37,34 +38,33 @@
     <!-- DOSTUPNI FILMOVI-->
     <div class="text-light p-5 m-5" id="kon1">
         <h1 class="text-center text-light p-5">Dostupni filmovi:</h1>
+        <?php 
+            $kolekcijaFilmova = Film::vratiSve($conn);
+            if($kolekcijaFilmova==null){
+                echo "Doslo je do greske";
+                exit();
+            }
+            else if($kolekcijaFilmova->num_rows == 0){
+                echo "Trenutno nema filmova na repertoaru";
+            }
+            else{
+                while ($row = $kolekcijaFilmova->fetch_array()):
+        ?>
 
         <ul class="col-12 p-5">
-            <li class="list-group-item text-center p-3"><h3>Harry Potter</h3></li>
-            <li class="list-group-item text-center"><b>Trajanje: </b><i>120min</i></li>
-            <li class="list-group-item text-center"><b>Sala: </b><i>44</i></li>
+            <li class="list-group-item text-center p-3"><h3><?= $row['filmNaziv']?></h3></li>
+            <li class="list-group-item text-center"><b>Trajanje: </b><i><?= $row['filmTrajanje'] ?> minuta</i></li>
+            <li class="list-group-item text-center"><b>Sala: </b><i><?= $row['filmSala'] ?></i></li>
             <li class ="list-group-item p-3">
                 <button class="btn btn-warning">Izmeni</button>
                 <button class="btn btn-danger">Obriši</button>
             </li>
         </ul>
-        <ul class="col-12 p-5">
-            <li class="list-group-item text-center p-3"><h3>Harry Potter</h3></li>
-            <li class="list-group-item text-center"><b>Trajanje: </b><i>120min</i></li>
-            <li class="list-group-item text-center"><b>Sala: </b><i>44</i></li>
-            <li class ="list-group-item p-3">
-                <button class="btn btn-warning">Izmeni</button>
-                <button class="btn btn-danger">Obriši</button>
-            </li>
-        </ul>
-        <ul class="col-12 p-5">
-            <li class="list-group-item text-center p-3"><h3>Harry Potter</h3></li>
-            <li class="list-group-item text-center"><b>Trajanje: </b><i>120min</i></li>
-            <li class="list-group-item text-center"><b>Sala: </b><i>44</i></li>
-            <li class ="list-group-item p-3">
-                <button class="btn btn-warning">Izmeni</button>
-                <button class="btn btn-danger">Obriši</button>
-            </li>
-        </ul>
+
+        <?php 
+            endwhile; 
+            }
+        ?>
     </div>
     <br><br><br>
 

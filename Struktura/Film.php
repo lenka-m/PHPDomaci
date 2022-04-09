@@ -1,5 +1,5 @@
 <?php
-    class Flm{
+    class Film{
         public $id;
         public $naziv;
         public $trajanje;
@@ -14,6 +14,9 @@
             $this->userID= $userID;
         }
         
-        
+        public static function vratiSve($conn){
+            $upit="SELECT * FROM `Film`";
+            return $conn->query($upit);
+        }
     }
 ?>
