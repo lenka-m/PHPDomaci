@@ -25,7 +25,7 @@
             <input class="form-control my-3" type="text" id="nazivF" placeholder="npr. Harry Potter">
             <h6>Unesite trajanje filma u minutima:</h6>
             <input class="form-control my-3" type="text" id="nazivF" placeholder="npr. 135">
-            <h6>Unesite salu gde se film projektuje:</h6>
+            <h6>Unesite broj salu gde se film projektuje:</h6>
             <input class="form-control my-3" type="text" id="nazivF" placeholder="npr. 44">
             <input class="form-control my-5 btn btn-success" type="submit" value="Upisi">
         </form>
