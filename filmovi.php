@@ -1,4 +1,7 @@
-<?php echo "." ?>
+<?php echo ".";
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,10 +17,10 @@
 
 </head>
 <body>
-
+    <a class="btn btn-danger" href="logout.php">Log out</a>
     <!-- DODAJ NOVI FILM -->
     <div class="   text-light p-5 m-5 text-center" id="kon1">
-    <h1 class="p-4">Zdravo _____</h1>
+    <h1 class="p-4">Zdravo</h1>
     <h4 class=" m-5 py-4">Pred tobom se nalaze dostupni filmovi u našem bioskopu. Ukoliko imate nekih novih projekcija ili je došlo do izmena trenutnih slobodno ih možete korigovati</h4>   
         <form action="">
  

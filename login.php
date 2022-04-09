@@ -8,8 +8,6 @@
     session_start();
     if( isset($_POST["uname"]) && isset($_POST["pass"])){
         $korisnik = new User(null,$_POST["uname"],$_POST["pass"]);
-
-
         $postoji = User::logInUser($conn, $korisnik);
 
         if($postoji->num_rows == 1){
@@ -22,6 +20,7 @@
             exit();
         }
         else{
+            // slucaj kada ne postoji korisnik 
             echo '<script>alert("neuspesno")</script>';
             $korisnik=null;
             header("Location: index.php");
