@@ -12,6 +12,10 @@
             $this -> name= $name;
         }
 
-        
+        public static function logInUser($conn, $usr){
+            $upit = "SELECT * FROM `Admin` WHERE `userName`='$usr->username' AND `password`='$usr->password'";
+            return $conn->query($upit);
+        }
+
     }
 ?>

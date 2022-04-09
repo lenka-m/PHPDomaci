@@ -1,6 +1,34 @@
 
 
-<?php  echo ".";?>
+<?php  
+    echo ".";
+    require "dbBroker.php"; // kako bi mogli da prosledimo konekciju sa bazom
+    require "Struktura/User.php"; // kako bi mogli da prosledimo objekat user
+
+    session_start();
+    if( isset($_POST["uname"]) && isset($_POST["pass"])){
+        $korisnik = new User(null,$_POST["uname"],$_POST["pass"]);
+
+
+        $postoji = User::logInUser($conn, $korisnik);
+
+        if($postoji->num_rows == 1){
+            // slucaj kada je pronasao korisnika
+
+            $row = $postoji->fetch_row();
+            $_SESSION['userID']= $row[0];
+            $korisnik->name=$row[3];
+            header("Location: filmovi.php");
+            exit();
+        }
+        else{
+            echo '<script>alert("neuspesno")</script>';
+            $korisnik=null;
+            header("Location: index.php");
+        }
+    }
+
+?>
 
 
 <!DOCTYPE html>
@@ -24,14 +52,14 @@
 
     <div class="container col-lg-4 d-flex justify-content-center opacity-75 bg-dark text-light ">
         <br>
-       <form action="">
+       <form method ="POST" action="">
             <!-- USERNAME -->
-           <input class="form-control mt-5" type="text" id="uname" placeholder="Username">
+           <input class="form-control mt-5" type="text" name="uname" placeholder="Username" required>
             <!-- PASSWORD -->
-           <input class= "form-control mt-5" type="password" id="pass" placeholder="Password">
+           <input class= "form-control mt-5" type="password" name="pass" placeholder="Password" required>
            <br><br>
            <!-- login -->
-           <input  type="submit" value="Log In">
+           <button   type="submit" class = "btn btn-primary">Log in</button>
        </form>
 
     </div>
