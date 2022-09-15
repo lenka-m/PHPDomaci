@@ -13,9 +13,25 @@
             $this->sala= $sala;
             $this->userID= $userID;
         }
+
+        //Ucitavanje filmova  ==================================================================
         
         public static function vratiSve($conn){
-            $upit="SELECT * FROM `Film`";
+            $upit="SELECT * FROM `filmovi`";
+            return $conn->query($upit);
+        }
+        //Upisivanje Novog Filma ==================================================================
+        
+        public static function upisi($noviFilm, $conn){
+            $upit="INSERT INTO `filmovi`(`naziv`, `trajanje`, `sala`, `userID`) VALUES ('$noviFilm->naziv','$noviFilm->trajanje','$noviFilm->sala','$noviFilm->userID')";
+            return $conn->query($upit);
+            
+        }
+
+        //Brisanje Filma ==================================================================
+
+        public static function obrisi($id, $conn){
+            $upit = "DELETE FROM `filmovi` WHERE `id` = '$id'";
             return $conn->query($upit);
         }
     }

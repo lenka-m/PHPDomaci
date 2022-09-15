@@ -2,9 +2,9 @@
     $host="localhost";
     $user="root";
     $password="root";
-    $db="Filmovi";
+    $dbName="Filmovi";
 
-    $conn= new mysqli($host,$user,$password,$db);
+    $conn= new mysqli($host,$user,$password,$dbName);
 
     if($conn->connect_errno){
         exit("Neuspešno povezivanje sa bazom");

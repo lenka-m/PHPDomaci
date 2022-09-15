@@ -2,20 +2,22 @@
 
 <?php  
     echo ".";
-    require "dbBroker.php"; // kako bi mogli da prosledimo konekciju sa bazom
-    require "Struktura/User.php"; // kako bi mogli da prosledimo objekat user
+    require "dbBroker.php"; // $conn 
+    require "Struktura/User.php"; //class User
 
     session_start();
-    if( isset($_POST["uname"]) && isset($_POST["pass"])){
-        $korisnik = new User(null,$_POST["uname"],$_POST["pass"]);
-        $postoji = User::logInUser($conn, $korisnik);
-
-        if($postoji->num_rows == 1){
-            // slucaj kada je pronasao korisnika
-
-            $row = $postoji->fetch_row();
-            $_SESSION['userID']= $row[0];
-            $korisnik->name=$row[3];
+    if( isset($_POST["username"]) && isset($_POST["password"])){
+        
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+        $korisnik = new User(null, $username, $password, null);
+        $result = User::logInUser($conn, $korisnik); // vraca upit;
+        $resultCheck = mysqli_num_rows($result);
+        if($resultCheck == 1){
+            # slucaj kada je pronasao korisnika
+            $row = mysqli_fetch_assoc($result);
+            $_SESSION['userID'] = $row['id'];
+            $_SESSION['name']= $row['name'];
             header("Location: filmovi.php");
             exit();
         }
@@ -25,6 +27,7 @@
             $korisnik=null;
             header("Location: index.php");
         }
+        
     }
 
 ?>
@@ -53,15 +56,17 @@
         <br>
        <form method ="POST" action="">
             <!-- USERNAME -->
-           <input class="form-control mt-5" type="text" name="uname" placeholder="Username" required>
+           <input class="form-control mt-5" type="text" name="username" placeholder="Username" required>
             <!-- PASSWORD -->
-           <input class= "form-control mt-5" type="password" name="pass" placeholder="Password" required>
+           <input class= "form-control mt-5" type="password" name="password" placeholder="Password" required>
            <br><br>
            <!-- login -->
            <button   type="submit" class = "btn btn-primary">Log in</button>
        </form>
 
+
     </div>
 
 </body>
 </html>
+

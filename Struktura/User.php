@@ -13,8 +13,9 @@
         }
 
         public static function logInUser($conn, $usr){
-            $upit = "SELECT * FROM `Admin` WHERE `userName`='$usr->username' AND `password`='$usr->password'";
-            return $conn->query($upit);
+            $upit = "SELECT * FROM `user` WHERE `username`='$usr->username' AND `password`='$usr->password';";
+            $result = mysqli_query($conn, $upit);
+            return $result;
         }
 
     }
