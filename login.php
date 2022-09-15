@@ -22,10 +22,9 @@
             exit();
         }
         else{
-            // slucaj kada ne postoji korisnik 
-            echo '<script>alert("neuspesno")</script>';
+        
             $korisnik=null;
-            header("Location: index.php");
+           // header("Location: index.php");
         }
         
     }

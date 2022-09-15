@@ -64,7 +64,7 @@
     <div class="text-light p-5 m-5" id="kon1">
         <h1 class="text-center text-light p-5">Dostupni filmovi:</h1>
         
-        <table>
+        <table id="tabelaFilmova">
 
             <thead class="thead-dark">
                 <th>Naziv <a class="sort" id="NazivSort"> ↑ </a> </th>
@@ -95,8 +95,10 @@
                         <button  class = "btn btn-danger btnObrisi" id = "btnBrisi" data-filmID = "<?=$row[0] ?>" >Delete </button>
                     </td>
                     <td>
-                        <button type="button" data-role = "update" class=" btnEdit btn btn-info btn-lg btn-warning" data-toggle="modal" data-target="#myModal" data-filmID = "<?=$row[0] ?>" >Edit</button>
+                        <button type="button" class=" btnEdit btn btn-info btn-lg btn-warning" data-sala = "<?= $row[3]?>" data-trajanje = "<?= $row[2]?>" data-name = "<?= $row[1] ?>" data-filmID = "<?=$row[0] ?>" >Edit</button>
                     </td>
+
+
 
                 </tr>
                 <?php 
@@ -106,46 +108,18 @@
             </tbody>
             
         </table>
-        <script> 
-            $(".btnEdit").click(function(e){
-                e.preventDefault();
-                let filmID = $(this).attr('data-filmID');
-                let naziv = $('#'+filmID).children('td[data-target = naziv>]').text();
-                console.log(naziv);
-                console.log(filmID);
-            });
-        </script>
+        
+        <form action="" style="display:none;" id="forma">
+            <input type = "text" id = "nazivInput" value=""> </input>
+            <input type = "text" id = "trajanjeInput" value=""> </input>
+            <input type = "text" id = "salaInput" value=""> </input>
+            <button id = "btnUpdate">Update</button>
+            <button id = "btnCancel">Cancel</button>
+        </form>
+
 
     </div>
 
- 
- <!-- Modal -->
-    <div class="modal " id="myModal" role="dialog">
-        <div class="modal-dialog">
-    
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        
-                    </div>
-                    <div class="modal-body">
-                        <label> Naziv:</label><br>
-                        <input type="text" value = "<?$row[1]?>" id="inputNaziv"><br>
-                        <label> Trajanje:</label><br>
-                        <input type="text" id="inputTrajanje"><br>
-                        <label> Sala:</label><br>
-                        <input type="text" id="inputSala"><br>
-                    </div>
-                    <div class="modal-footer">
-                        <button class = "btn btn-success" id ="btnSaveEdit"> Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-      
-        </div>
-    </div>     
-    
 
 </body>
 </html>

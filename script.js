@@ -45,9 +45,51 @@ $(document).ready(function(){
     });
 });
 
+// ----- UPDATE  ------------------------------------------------------------------------------------------
+$(document).ready(function(){
+$(".btnEdit").click(function(e){
+    e.preventDefault();
+    let filmID = $(this).attr('data-filmID');
+    let naziv = $(this).attr('data-name');
+    let sala = $(this).attr('data-sala');
+    let trajanje = $(this).attr('data-trajanje');
+
+    document.getElementById('nazivInput').value = naziv;
+    document.getElementById('salaInput').value = sala;
+    document.getElementById('trajanjeInput').value = trajanje;
+    document.getElementById('forma').style.display = 'block';
+
+    $("#btnCancel").click(function(e){
+        e.preventDefault();
+        document.getElementById('forma').style.display = 'none';
+    })
+    $("#btnUpdate").click(function(e){
+        let naziv = $("#nazivInput").val();
+        console.log(naziv);
+        let sala = $("#salaInput").val();
+        let trajanje = $("#trajanjeInput").val();
+        e.preventDefault();
+        let request = $.post('controller/update.php', {
+            id: filmID,
+            naziv:naziv,
+            trajanje: trajanje,
+            sala: sala
+        });
+
+        
+        request.done(function(response){
+            if(response == "Sakses"){
+                alert("Uspesno su izmenjene informacije!");
+                
+                location.reload(true);
+            } else console.log("Greska prilikom" + response);
+        });
 
 
+    })
 
+});
+});
 // ----- SEARCH  ------------------------------------------------------------------------------------------
     $(document).ready(function(){
         $("#search").keyup(function(){
@@ -75,4 +117,4 @@ $(document).ready(function(){
         $('#myInput').trigger('focus')
     });
     
-// ----- UPDATE  ------------------------------------------------------------------------------------------
+
